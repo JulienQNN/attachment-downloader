@@ -10,7 +10,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository | lower }}
+  IMAGE_NAME: attachment-downloader
 
 jobs:
   build-and-push:
@@ -18,6 +18,8 @@ jobs:
     permissions:
       contents: read
       packages: write
+    env:
+      IMAGE_FULL_PATH: ghcr.io/${{ github.repository_owner | lower }}/attachment-downloader
 
     steps:
     - name: Checkout repository
@@ -39,7 +41,7 @@ jobs:
         context: .
         push: true
         tags: |
-          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.event.inputs.tag }}
-          ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+          ${{ env.IMAGE_FULL_PATH }}:${{ github.event.inputs.tag }}
+          ${{ env.IMAGE_FULL_PATH }}:latest
         cache-from: type=gha
         cache-to: type=gha,mode=max
