@@ -2,16 +2,18 @@ import os
 
 from setuptools import setup, find_packages
 
-from attachment_downloader.version_info import Version
-
-Version.generate()
+try:
+    from attachment_downloader.version_info import Version
+    version = Version.get()
+except Exception:
+    version = '0.0.1'
 
 with open(os.path.abspath(os.path.join(os.path.dirname(__file__), 'requirements.txt'))) as f:
     install_reqs = f.read().splitlines()
 
 setup(
     name='attachment-downloader',
-    version=Version.get(),
+    version=version,
     description='Simple tool for downloading email attachments for all emails in a given folder using an IMAP client.',
     long_description=open('README.rst').read(),
     author='James Ridgway',
