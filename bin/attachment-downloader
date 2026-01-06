@@ -15,7 +15,6 @@ from jinja2 import Template, UndefinedError
 from attachment_downloader.cli import valid_date, get_password
 from attachment_downloader.encoding import QuoPriEncoding
 from attachment_downloader.logging import Logger
-from attachment_downloader.version_info import Version
 
 
 def build_filter_options():
@@ -172,7 +171,7 @@ if __name__ == '__main__':
                 options.__dict__[option] = value
 
     Logger.setup(options.loglevel)
-    logging.info(f'Attachment Downloader - Version: {Version.get()} {Version.get_env_info()}')
+    logging.info('Attachment Downloader')
 
     if not options.host:
         parser.error('--host parameter required')
