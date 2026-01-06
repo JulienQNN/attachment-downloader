@@ -1,4 +1,4 @@
-FROM python:3.13-slim
+FROM python:3.13-alpine
 
 WORKDIR /usr/src/app
 
@@ -9,9 +9,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the rest of the code
 COPY . .
 
+RUN apk update && apk add git
+
 # Install the package
 RUN pip install --no-cache-dir .
-
-ENTRYPOINT [ "attachment-downloader" ]
 
 ENTRYPOINT [ "attachment-downloader" ]
